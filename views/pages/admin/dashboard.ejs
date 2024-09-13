@@ -1,0 +1,35 @@
+<%- include('../layouts/main') %>
+
+<h1>Admin Dashboard</h1>
+
+<a href="/admin/add" class="btn">Add New Event</a>
+
+<h2>Manage Events</h2>
+
+<% if (events.length > 0) { %>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% events.forEach(event => { %>
+                <tr>
+                    <td><%= event.name %></td>
+                    <td><%= event.date %></td>
+                    <td>
+                        <a href="/admin/edit/<%= event.id %>" class="btn btn-small">Edit</a>
+                        <form action="/admin/delete/<%= event.id %>" method="POST" style="display: inline;">
+                            <button type="submit" class="btn btn-small btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+<% } else { %>
+    <p>No events found.</p>
+<% } %>
