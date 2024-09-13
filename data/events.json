@@ -1,0 +1,18 @@
+[
+    {
+        "id": "1234567890",
+        "name": "Annual Tech Conference",
+        "date": "2024-11-15T09:00:00Z",
+        "description": "Join us for a day of cutting-edge technology talks and networking opportunities.",
+        "capacity": 500,
+        "location": "Tech Center, 123 Innovation Ave, Silicon Valley, CA"
+    },
+    {
+        "id": "0987654321",
+        "name": "Local Hackathon",
+        "date": "2024-12-01T10:00:00Z",
+        "description": "Put your coding skills to the test in this 24-hour hackathon event!",
+        "capacity": 100,
+        "location": "City Library, 456 Main St, Techville, NY"
+    }
+]
