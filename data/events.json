@@ -2,7 +2,7 @@
     {
         "id": "1234567890",
         "name": "Annual Tech Conference",
-        "date": "2024-11-15T09:00:00Z",
+        "date": "11/15/2024",
         "description": "Join us for a day of cutting-edge technology talks and networking opportunities.",
         "capacity": 500,
         "location": "Tech Center, 123 Innovation Ave, Silicon Valley, CA"
@@ -10,9 +10,80 @@
     {
         "id": "0987654321",
         "name": "Local Hackathon",
-        "date": "2024-12-01T10:00:00Z",
+        "date": "12/01/2024",
         "description": "Put your coding skills to the test in this 24-hour hackathon event!",
         "capacity": 100,
         "location": "City Library, 456 Main St, Techville, NY"
+    },
+    {
+        "id": "3289471602",
+        "name": "Izio",
+        "date": "09/17/2022",
+        "description": "Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.",
+        "capacity": 100,
+        "location": "3051 Raven Road"
+    }, {
+        "id": "4157628390",
+        "name": "Browseblab",
+        "date": "08/09/2021",
+        "description": "Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam.",
+        "capacity": 439,
+        "location": "04650 Vera Place"
+    }, {
+        "id": "6703948125",
+        "name": "Yakitri",
+        "date": "10/28/2017",
+        "description": "Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam vel augue.",
+        "capacity": 263,
+        "location": "1800 Scofield Parkway"
+    }, {
+        "id": "9812543670",
+        "name": "Wordpedia",
+        "date": "04/09/2017",
+        "description": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti. Nullam porttitor lacus at turpis.",
+        "capacity": 112,
+        "location": "3366 Anthes Crossing"
+    }, {
+        "id": "5402839167",
+        "name": "Leenti",
+        "date": "01/09/2015",
+        "description": "Vivamus vel nulla eget eros elementum pellentesque.",
+        "capacity": 104,
+        "location": "05 Hauk Center"
+    }, {
+        "id": "2738904615",
+        "name": "Skivee",
+        "date": "04/23/2022",
+        "description": "In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.",
+        "capacity": 110,
+        "location": "20 Vera Circle"
+    }, {
+        "id": "6197482034",
+        "name": "Quire",
+        "date": "02/11/2017",
+        "description": "Pellentesque ultrices mattis odio. Donec vitae nisi. Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus.",
+        "capacity": 253,
+        "location": "74363 Pearson Parkway"
+    }, {
+        "id": "8042157396",
+        "name": "Quatz",
+        "date": "06/19/2022",
+        "description": "In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.",
+        "capacity": 492,
+        "location": "625 Lake View Avenue"
+    }, {
+        "id": "1579263840",
+        "name": "Wikido",
+        "date": "02/26/2017",
+        "description": "Duis at velit eu est congue elementum. In hac habitasse platea dictumst.",
+        "capacity": 132,
+        "location": "75 Westerfield Street"
+    }, {
+        "id": "9324807165",
+        "name": "Feednation",
+        "date": "07/27/2023",
+        "description": "Maecenas pulvinar lobortis est.",
+        "capacity": 437,
+        "location": "994 Daystar Lane"
     }
 ]
