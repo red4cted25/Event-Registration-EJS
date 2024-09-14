@@ -13,16 +13,40 @@ app.use('/public', express.static('public'));
 // Set the view engine to ejs
 app.set('view engine', 'ejs')
 
-// Read data from a JSON file
-let data = fs.readFileSync('data/events.json');
-let jsonData = JSON.parse(data)
+// Funtion to get events from events.json
+function getEvents() {
+    let data = fs.readFileSync('data/events.json');
+    let jsonData = JSON.parse(data)
+    return jsonData
+}
 
 // Index page
 app.get('/', (req, res) => {
     res.render('pages/index', {
-        events: jsonData
+        customStylesheet: '/public/css/index.css'
     })
 })
+
+// Events page
+app.get('/events', (req, res) => {
+    res.render('pages/events', {
+        events: getEvents(),
+        customStylesheet: '/public/css/events.css'
+    })
+})
+
+// Register page
+app.get('/register', (req, res) => {
+    const selectedEventId = req.query.event; // Get event ID from query parameter => /register?event=123456789
+    let events = getEvents()
+    const selectedEvent = events.find(item => item.id === selectedEventId)
+    res.render('pages/register', {
+        events: events,
+        selectedEvent,
+        selectedEventId,
+        customStylesheet: '/public/css/register.css'
+    });
+});
 
 // // Read data from a JSON file
 // let data = fs.readFileSync('/data/json');
