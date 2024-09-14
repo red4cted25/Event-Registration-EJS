@@ -1,0 +1,46 @@
+/* Page Header */
+h1 {
+    color: #333;
+    text-align: center;
+}
+
+/* Event Details Section */
+h2 {
+    color: #444;
+}
+
+h3 {
+    color: #333;
+}
+
+p {
+    color: #666;
+}
+.event-details {
+    margin-left: 3vw;
+}
+
+/* Form Styling */
+form {
+    background-color: #fff;
+    border-radius: 1vw;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 2vw;
+    max-width: 60vw;
+    margin: 2vh auto;
+    box-sizing: border-box;
+}
+
+label {
+    font-size: 1vw;
+    margin-bottom: 1vh;
+    display: block;
+}
+
+input[type="text"], input[type="email"] {
+    width: 70%;
+    font-size: 1.25vw;
+    border: 1px solid #ddd;
+    border-radius: 0.5vh;
+    margin-bottom: 2vh;
+}
