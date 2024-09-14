@@ -1,18 +1,22 @@
 <h1>Event Registration</h1>
 
+<h2>Event Details</h2>
+
+<div class="event-info">
+    <h3><%= selectedEvent.name %></h2>
+    <p>Date: <%= selectedEvent.date %></p>
+    <p><%= selectedEvent.description %></p>        
+</div>
+
 <form action="/register" method="POST">
+    <!-- Include event id without user selecting what event they picked again -->
+    <input type="hidden" name="eventId" value="<%= selectedEventId %>">
+
     <label for="name">Name:</label>
     <input type="text" id="name" name="name" required>
     
     <label for="email">Email:</label>
     <input type="email" id="email" name="email" required>
-    
-    <label for="eventId">Select Event:</label>
-    <select id="eventId" name="eventId" required>
-        <% events.forEach(event => { %>
-            <option value="<%= event.id %>"><%= event.name %> - <%= event.date %></option>
-        <% }) %>
-    </select>
-    
+    <br>
     <button type="submit">Register</button>
 </form>
