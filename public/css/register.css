@@ -15,6 +15,10 @@ h3 {
 p {
     color: #666;
 }
+
+footer p {
+    color: #fff;
+}
 .event-info {
     display: flex;
     flex-direction: column;
