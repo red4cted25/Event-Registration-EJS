@@ -4,6 +4,7 @@ const fs = require('fs')
 const PORT = 5000
 const bodyParser = require('body-parser')
 const expressLayouts = require('express-ejs-layouts');
+const path = require('path');
 
 // Middleware
 app.use(expressLayouts);
@@ -32,54 +33,83 @@ app.get('/events', (req, res) => {
 })
 
 // Register page
-app.get('/register', (req, res) => {
-    const selectedEventId = req.query.event; // Get event ID from query parameter => /register?event=123456789
-    let events = getEvents()
-    const selectedEvent = events.find(item => item.id === selectedEventId)
+app.get('/register/:id', (req, res) => {
+    const events = getEvents()
+    const eventId = parseInt(req.params.id);
+    const selectedEvent = events.find(item => item.id == eventId);
     res.render('pages/register', {
         events: events,
         selectedEvent,
-        selectedEventId,
+        selectedEventId: eventId,
         customStylesheet: '/public/css/register.css'
     });
 });
 
 // POST route to handle registration
-// app.post('/register', (req, res) => {
-//     const newRegistration = {
-//         name: req.body.name,
-//         email: req.body.email,
-//         eventId: req.body.eventId
-//     };
-//     fs.readFile('data/registrations.json', 'utf8', (err, data) => {
-//         if (err) {
-//             console.error(err);
-//             return res.status(500).send('Error reading events data');
-//         }
-//         if (err && err.code === 'ENOENT') {
-//             // If the file doesn't exist, initialize an empty array
-//             let registrations = [];
-//         } else {
-//             const registrations = JSON.stringify(data);
-//             const parseRegistrations = JSON.parse(registrations);
-//             parseRegistrations.push(newRegistration);
-//             fs.writeFile('data/registrations.json', JSON.stringify(registrations, null, 2), (err) => {
-//                 if (err) {
-//                     console.error(err);
-//                     return res.status(500).send('Error writing registration data');
-//                 }
-//                 registerRedirect(req.body.eventId);
-//             });
-//         }
-//     })
-// });
+app.post('/register/:id', (req, res) => {
+    const registrations = getRegistrations();
+    const newRegistration = {
+        name: req.body.personName,
+        email: req.body.email,
+        date: formatDate(),
+        eventId: req.body.eventId
+    }
+    registrations.push(newRegistration)
+    saveRegistrations(registrations);
+    updateAttendees(req.body.eventId, 1);
+    res.redirect('/register/' + req.body.eventId + '?success=true')
+});
 
-// admin pages
-// app.get('/admin', (req, res) => {
-//     res.render('pages/admin', {
-//         events: events,
-//     })
-// })
+// Admin pages
+app.get('/admin', (req, res) => {
+    const events = getEvents()
+    res.render('pages/admin/dashboard', {
+        events: events,
+        customStylesheet: '/public/css/dashboard.css'
+    })
+})
+
+// Admin Delete
+app.post('/admin/delete/:id', (req, res) => {
+    let events = getEvents();
+    events = events.filter(event => event.id != req.params.id);
+    saveEvents(events);
+    res.redirect('/admin');
+})
+
+// Admin Edit
+app.get('/admin/edit/:id', (req, res) => {
+    const events = getEvents();
+    const registrations = getRegistrations();
+    const eventRegistrations = registrations.filter(registration => registration.id === req.params.id);
+    const event = events.find(event => event.id === req.params.id);
+    res.render('pages/admin/edit-event', { 
+        event,
+        registrations: eventRegistrations
+    });
+})
+
+// Admin Edit - Attendees Delete
+app.post('/admin/edit/:id/:personId', (req, res) => {
+    const { id, personId } = req.params;
+    const registrations = getRegistrations();
+    
+    // Filter out the registration to delete
+    const updatedRegistrations = registrations.filter(registration => registration.id !== parseInt(id) || registration.id !== parseInt(personId));
+    saveRegistrations(updatedRegistrations);
+    updateAttendees(id, 0);
+    res.redirect('/admin');
+})
+
+// Admin Edit - POST
+app.post('/admin/edit/:id', (req, res) => {
+    const events = getEvents();
+    const eventIndex = events.findIndex(event => event.id == req.params.id);
+    events[eventIndex].description = req.body.description
+    events[eventIndex].name = req.params.name
+    saveEvents(events);
+    res.redirect('/');
+});
 
 app.listen(PORT, () => {
     console.log(`Server running on port http://localhost:${PORT}`)
@@ -89,22 +119,40 @@ app.listen(PORT, () => {
 function formatDate() {
     const newDate = new Date().toISOString().slice(0, 10);
     const formattedDate = newDate.split('-');
-
     const mmddyyyy = `${formattedDate[1]}/${formattedDate[2]}/${formattedDate[0]}`;
-    console.log(mmddyyyy);
+    return mmddyyyy;
 }
 
 // Function to get events from events.json
 function getEvents() {
-    let data = fs.readFileSync('data/events.json');
-    let jsonData = JSON.parse(data)
-    return jsonData
+    const data = fs.readFileSync(path.join(__dirname, './data/events.json'), 'utf8');
+    return JSON.parse(data)
 }
 
-// Function to handle redirect for register post
-function registerRedirect(eventId) {
-    res.redirect('/events?success=true')
-    events = getEvents();
-    const selectedEvent = events.find(item => item.id === eventId)
-    selectedEvent.attendees++
+// Function to get registered people from registrations.json
+function getRegistrations() {
+    const data = fs.readFileSync('./data/registrations.json', 'utf8');
+    return JSON.parse(data)
+}
+
+// Function to write registrations
+const saveRegistrations = (registrations) => {
+    fs.writeFileSync('./data/registrations.json', JSON.stringify(registrations, null, 2), 'utf8')
+}
+
+// Function to write events
+function saveEvents(events) {
+    fs.writeFileSync('./data/events.json', JSON.stringify(events, null, 2), 'utf8');
+}
+
+// Function to update event attendees value for register post
+function updateAttendees(eventId, value) {
+    const events = getEvents();
+    const eventIndex = events.findIndex(item => item.id === parseInt(eventId));
+    if(value == 1) {
+        events[eventIndex].attendees++
+    } else {
+        events[eventIndex].attendees--
+    }
+    saveEvents(events);
 }
