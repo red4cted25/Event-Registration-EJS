@@ -8,12 +8,12 @@
     <p><%= selectedEvent.description %></p>        
 </div>
 
-<form action="/register" method="POST">
+<form action="/register/:id" method="POST">
     <!-- Include event id without user selecting what they picked again -->
     <input type="hidden" name="eventId" value="<%= selectedEventId %>">
 
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" placeholder="John Doe" required>
+    <label for="personName">Name:</label>
+    <input type="text" id="personName" name="personName" placeholder="John Doe" required>
     
     <label for="email">Email:</label>
     <input type="email" id="email" name="email" placeholder="johndoe2000@example.com" required>
