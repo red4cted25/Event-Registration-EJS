@@ -1,1 +1,47 @@
 <!-- include list of everyone registered for that event -->
+<h1>Edit event</h1>
+
+<h2>View Participants</h2>
+<% if (registrations.length > 0) { %>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% registrations.forEach(person => { %>
+                <tr>
+                    <td><%= person.name %></td>
+                    <td><%= person.email %></td>
+                    <td><%= person.date %></td>
+                    <td>
+                        <form action="/admin/delete/person/<%= event.id %>" method="POST" style="display: inline;">
+                            <button type="submit" class="btn btn-small btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+<% } else { %>
+    <p>No Attendees found.</p>
+<% } %>
+
+<h2>Event Info</h2>
+<form action="/admin/edit/:id/:personId" class="event-form" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" value="<%= event.name %>" required>
+
+    <label for="date">Date:</label>
+    <input type="date" id="date" name="date" value="<%= event.date %>"required>
+
+    <label for="description">Description:</label>
+    <textarea cols="40" rows="10" id="description" name="description" required><%= event.description %></textarea>
+    <button type="submit">Update event</button>
+</form>
+
+<button type="button" class="back"><a href="/">Back to list</a></button>
