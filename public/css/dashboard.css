@@ -1,0 +1,46 @@
+#details {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+#details .btn {
+    margin: 2vh auto;
+}
+
+/* Table Styling */
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    margin: 0 2vw;
+    margin:  2vh auto;
+}
+
+thead {
+    background-color: #bbb;
+}
+
+th {
+    text-align: center;
+}
+
+td, th {
+    border: 1px solid #555;
+    text-align: left;
+}
+
+td {
+    font-size: .75vw;
+    padding: 1.5vh;
+}
+
+tbody tr {
+    height: 5vh;
+}
+
+tr:nth-child(even) {
+    background-color: #ddd;
+}
