@@ -81,11 +81,12 @@ app.post('/admin/delete/:id', (req, res) => {
 app.get('/admin/edit/:id', (req, res) => {
     const events = getEvents();
     const registrations = getRegistrations();
-    const eventRegistrations = registrations.filter(registration => registration.id === req.params.id);
-    const event = events.find(event => event.id === req.params.id);
+    const eventRegistrations = registrations.filter(registration => registration.eventId == req.params.id);
+    const event = events.find(event => event.id == req.params.id);
     res.render('pages/admin/edit-event', { 
         event,
-        registrations: eventRegistrations
+        registrations: eventRegistrations,
+        customStylesheet: '/public/css/admin-event.css'
     });
 })
 
@@ -95,10 +96,10 @@ app.post('/admin/edit/:id/:personId', (req, res) => {
     const registrations = getRegistrations();
     
     // Filter out the registration to delete
-    const updatedRegistrations = registrations.filter(registration => registration.id !== parseInt(id) || registration.id !== parseInt(personId));
+    const updatedRegistrations = registrations.filter(registration => registration.id != id || registration.id != personId);
     saveRegistrations(updatedRegistrations);
     updateAttendees(id, 0);
-    res.redirect('/admin');
+    res.redirect('/admin/edit/' + id);
 })
 
 // Admin Edit - POST
@@ -148,7 +149,7 @@ function saveEvents(events) {
 // Function to update event attendees value for register post
 function updateAttendees(eventId, value) {
     const events = getEvents();
-    const eventIndex = events.findIndex(item => item.id === parseInt(eventId));
+    const eventIndex = events.findIndex(item => item.id == eventId);
     if(value == 1) {
         events[eventIndex].attendees++
     } else {
