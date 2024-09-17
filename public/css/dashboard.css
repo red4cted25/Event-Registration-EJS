@@ -17,6 +17,7 @@ table {
     border-collapse: collapse;
     margin: 0 2vw;
     margin:  2vh auto;
+    width: 40vw;
 }
 
 thead {
@@ -35,6 +36,11 @@ td, th {
 td {
     font-size: .75vw;
     padding: 1.5vh;
+    font-size: clamp(0.75rem, 0.482rem + 0.714vw, 1.125rem);
+}
+
+button {
+    font-size: clamp(0.75rem, 0.482rem + 0.714vw, 1.125rem);
 }
 
 tbody tr {
