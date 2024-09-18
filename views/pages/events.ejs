@@ -14,8 +14,8 @@
             <% events.forEach(event => { %>
                 <tr>
                     <td><%= event.name %></td>
-                    <td style="width: 7%;"><%= event.date %></td>
-                    <td><%= event.description %></td>
+                    <td style="width: 1vw;"><%= event.date %></td>
+                    <td style="width: 40vw;"><%= event.description %></td>
                     <td><a href="/register/<%= event.id %>" class="btn">Register</a></td>
                 </tr>
             <% }) %>
