@@ -4,27 +4,26 @@ h1 {
 
 /* Table Styling */
 table {
-    font-family: arial, sans-serif;
     border-collapse: collapse;
-    margin: 0 2vw;
+    margin: 3vh auto;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
 thead {
-    background-color: #bbb;
-}
-
-th {
-    text-align: center;
+    background-color: #333;
+    color: #fff;
+    border-radius: 1vw;
 }
 
 td, th {
-    border: 1px solid #555;
     text-align: left;
+    padding: 1.5vh;
 }
 
 td {
     font-size: .75vw;
-    padding: 1.5vh;
     font-size: clamp(0.75rem, 0.482rem + 0.714vw, 1.125rem);
 }
 
@@ -34,4 +33,13 @@ tbody tr {
 
 tr:nth-child(even) {
     background-color: #ddd;
+}
+
+tr:last-of-type {
+    border-bottom: 2px solid #333;
+}
+
+tr.active-row {
+    font-weight: bold;
+    color: #009879;
 }
