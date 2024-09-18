@@ -8,7 +8,7 @@
     <p><%= selectedEvent.description %></p>        
 </div>
 
-<form action="/register/:id" method="POST">
+<form action="/register" method="POST">
     <!-- Include event id without user selecting what they picked again -->
     <input type="hidden" name="eventId" value="<%= selectedEventId %>">
 

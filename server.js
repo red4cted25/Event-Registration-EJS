@@ -46,7 +46,7 @@ app.get('/register/:id', (req, res) => {
 });
 
 // POST route to handle registration
-app.post('/register/:id', (req, res) => {
+app.post('/register', (req, res) => {
     const registrations = getRegistrations();
     const newRegistration = {
         name: req.body.personName,
@@ -149,7 +149,8 @@ function saveEvents(events) {
 // Function to update event attendees value for register post
 function updateAttendees(eventId, value) {
     const events = getEvents();
-    const eventIndex = events.findIndex(item => item.id == eventId);
+    console.log(eventId)
+    const eventIndex = events.findIndex(item => item.id == parseInt(eventId));
     if(value == 1) {
         events[eventIndex].attendees++
     } else {

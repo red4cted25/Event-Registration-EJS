@@ -20,7 +20,7 @@
                         <td><%= person.email %></td>
                         <td><%= person.date %></td>
                         <td>
-                            <form action="/admin/delete/person/<%= event.id %>" method="POST" style="display: inline;">
+                            <form action="/admin/edit/<%= event.id %>/<%= person.id %>" method="POST" style="display: inline;">
                                 <button type="submit" class="btn btn-small btn-danger">Delete</button>
                             </form>
                         </td>
@@ -36,7 +36,7 @@
 
 <h2>Event Info</h2>
 <div id="event-edit">
-    <form action="/admin/edit/:id/:personId" class="event-form" method="POST">
+    <form action="/admin/edit/<%= event.id %>" class="event-form" method="POST">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" value="<%= event.name %>" required>
 
