@@ -91,15 +91,14 @@ app.get('/admin/edit/:id', (req, res) => {
 })
 
 // Admin Edit - Attendees Delete
-app.post('/admin/edit/:id/:personId', (req, res) => {
-    const { id, personId } = req.params;
-    const registrations = getRegistrations();
+app.post('/admin/edit/delete/:personId', (req, res) => {
+    let registrations = getRegistrations();
     
     // Filter out the registration to delete
-    const updatedRegistrations = registrations.filter(registration => registration.id != id || registration.id != personId);
-    saveRegistrations(updatedRegistrations);
-    updateAttendees(id, 0);
-    res.redirect('/admin/edit/' + id);
+    registrations = registrations.filter(registration => registration.eventId != req.params.personId);
+    saveRegistrations(registrations);
+    updateAttendees(req.body.id, 0);
+    res.redirect('/admin/edit/' + req.body.id);
 })
 
 // Admin Edit - POST
@@ -149,11 +148,11 @@ function saveEvents(events) {
 // Function to update event attendees value for register post
 function updateAttendees(eventId, value) {
     const events = getEvents();
-    console.log(eventId)
-    const eventIndex = events.findIndex(item => item.id == parseInt(eventId));
+    const eventIndex = events.findIndex(item => item.id == eventId);
     if(value == 1) {
         events[eventIndex].attendees++
-    } else {
+    }
+    if (value == 0) {
         events[eventIndex].attendees--
     }
     saveEvents(events);
