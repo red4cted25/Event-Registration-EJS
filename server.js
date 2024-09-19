@@ -17,27 +17,30 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Set the view engine to ejs
 app.set('view engine', 'ejs')
 
-// Index page
+// ! Index page
 app.get('/', (req, res) => {
     res.render('pages/index', {
+        pageTitle: 'Home',
         customStylesheet: '/public/css/index.css'
     })
 })
 
-// Events page
+// ! Events page
 app.get('/events', (req, res) => {
     res.render('pages/events', {
+        pageTitle: 'Events',
         events: getEvents(),
         customStylesheet: '/public/css/events.css'
     })
 })
 
-// Register page
+// ! Register page
 app.get('/register/:id', (req, res) => {
     const events = getEvents()
     const eventId = parseInt(req.params.id);
     const selectedEvent = events.find(item => item.id == eventId);
     res.render('pages/register', {
+        pageTitle: `Register For ${selectedEvent.name}`,
         events: events,
         selectedEvent,
         selectedEventId: eventId,
@@ -48,7 +51,9 @@ app.get('/register/:id', (req, res) => {
 // POST route to handle registration
 app.post('/register', (req, res) => {
     const registrations = getRegistrations();
+    const registrationId = newId(registrations, 'personId');
     const newRegistration = {
+        personId: registrationId,
         name: req.body.personName,
         email: req.body.email,
         date: formatDate(),
@@ -60,10 +65,11 @@ app.post('/register', (req, res) => {
     res.redirect('/register/' + req.body.eventId + '?success=true')
 });
 
-// Admin pages
+// ! Admin Pages
 app.get('/admin', (req, res) => {
     const events = getEvents()
     res.render('pages/admin/dashboard', {
+        pageTitle: 'Admin',
         events: events,
         customStylesheet: '/public/css/dashboard.css'
     })
@@ -83,7 +89,8 @@ app.get('/admin/edit/:id', (req, res) => {
     const registrations = getRegistrations();
     const eventRegistrations = registrations.filter(registration => registration.eventId == req.params.id);
     const event = events.find(event => event.id == req.params.id);
-    res.render('pages/admin/edit-event', { 
+    res.render('pages/admin/edit-event', {
+        pageTitle: `Edit ${event.name}`,
         event,
         registrations: eventRegistrations,
         customStylesheet: '/public/css/admin-event.css'
@@ -93,12 +100,13 @@ app.get('/admin/edit/:id', (req, res) => {
 // Admin Edit - Attendees Delete
 app.post('/admin/edit/delete/:personId', (req, res) => {
     let registrations = getRegistrations();
+    let eventId = parseInt(req.body.eventId)
     
     // Filter out the registration to delete
-    registrations = registrations.filter(registration => registration.eventId != req.params.personId);
+    registrations = registrations.filter(registration => registration.personId != req.params.personId);
     saveRegistrations(registrations);
-    updateAttendees(req.body.id, 0);
-    res.redirect('/admin/edit/' + req.body.id);
+    updateAttendees(eventId, 0);
+    res.redirect('/admin/edit/' + eventId);
 })
 
 // Admin Edit - POST
@@ -106,21 +114,54 @@ app.post('/admin/edit/:id', (req, res) => {
     const events = getEvents();
     const eventIndex = events.findIndex(event => event.id == req.params.id);
     events[eventIndex].description = req.body.description
-    events[eventIndex].name = req.params.name
+    events[eventIndex].name = req.body.name
+    events[eventIndex].date = formatDate(req.body.date)
     saveEvents(events);
-    res.redirect('/');
+    res.redirect('/admin');
+});
+
+// Admin Add
+app.get('/admin/add', (req, res) => {
+    const events = getEvents();
+    res.render('pages/admin/add-event', { 
+        pageTitle: 'Add Event',
+        events,
+        customStylesheet: '/public/css/admin-event.css'
+    });
+})
+
+// Admin Add - POST
+app.post('/admin/add', (req, res) => {
+    const events = getEvents();
+    const newEvent = {
+        id: newId(events, 'id'),
+        name: req.body.name,
+        date: formatDate(req.body.date), 
+        capacity: parseInt(req.body.capacity),
+        location: req.body.location,
+        description: req.body.description,
+        attendees: 0  
+    };
+    events.push(newEvent);
+    saveEvents(events);
+    res.redirect('/admin');  
 });
 
 app.listen(PORT, () => {
     console.log(`Server running on port http://localhost:${PORT}`)
 })
 
+// ! FUNCTIONS
+
 // Date formatter
-function formatDate() {
-    const newDate = new Date().toISOString().slice(0, 10);
-    const formattedDate = newDate.split('-');
-    const mmddyyyy = `${formattedDate[1]}/${formattedDate[2]}/${formattedDate[0]}`;
-    return mmddyyyy;
+function formatDate(dateInput) {
+    const newDate = dateInput ? new Date(dateInput) : new Date(); // Use current date if no input
+    const formattedDate = [
+        (newDate.getMonth() + 1).toString().padStart(2, '0'),  // Month (0-based, so +1)
+        newDate.getDate().toString().padStart(2, '0'),          // Day
+        newDate.getFullYear()                                  // Year
+    ].join('/');
+    return formattedDate;
 }
 
 // Function to get events from events.json
@@ -149,6 +190,7 @@ function saveEvents(events) {
 function updateAttendees(eventId, value) {
     const events = getEvents();
     const eventIndex = events.findIndex(item => item.id == eventId);
+    
     if(value == 1) {
         events[eventIndex].attendees++
     }
@@ -156,4 +198,13 @@ function updateAttendees(eventId, value) {
         events[eventIndex].attendees--
     }
     saveEvents(events);
+}
+
+// Function to generate a new unique ID
+function newId(jsonData, idField) {
+    let newId = jsonData.length + 1;
+    while (jsonData.some(item => item[idField] == newId)) {
+        newId++;
+    }
+    return newId; 
 }
