@@ -11,12 +11,19 @@ h1, h2 {
 
 /* Table Styling */
 table {
-    border-collapse: collapse;
-    margin: 0 2vw;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 3vh auto;
+    font-size: 0.9em;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    border-radius: 1vw 1vw 0 0;
+    overflow: hidden;
+    border-bottom: .5vh solid #333;
 }
 
 thead {
-    background-color: #bbb;
+    background-color: #333;
+    color: #fff;
 }
 
 th {
@@ -24,13 +31,16 @@ th {
 }
 
 td, th {
-    border: 1px solid #555;
     text-align: left;
+    padding: 1.5vh;
 }
 
 td {
     font-size: .75vw;
-    padding: 1.5vh;
+    font-size: clamp(0.75rem, 0.482rem + 0.714vw, 1.125rem);
+}
+
+button {
     font-size: clamp(0.75rem, 0.482rem + 0.714vw, 1.125rem);
 }
 
