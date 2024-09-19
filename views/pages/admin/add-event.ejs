@@ -1,0 +1,22 @@
+<h2>Event Info</h2>
+<div id="event-add">
+    <form action="/admin/add" class="event-form" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+
+        <label for="capacity">Capacity:</label>
+        <input type="number" id="capacity" name="capacity" required>
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" required>
+        
+        <label for="description">Description:</label>
+        <textarea cols="40" rows="10" id="description" name="description" required></textarea>
+        <div class="flex"><button type="submit">Create Event</button></div>
+    </form>
+
+    <button type="button" class="back"><a href="/admin">Back to list</a></button>
+</div>
