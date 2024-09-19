@@ -79,5 +79,14 @@
     "capacity": 132,
     "attendees": 10,
     "location": "75 Westerfield Street"
+  },
+  {
+    "id": 12,
+    "name": "Cool Day",
+    "date": "10/30/2024",
+    "capacity": 20,
+    "location": "Salem, Massachusetts",
+    "description": "A cool event on halloween",
+    "attendees": 0
   }
 ]
