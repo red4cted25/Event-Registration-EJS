@@ -17,7 +17,7 @@ EventQuest is a web-based event registration system built using Node.js, Express
 1. Clone the repository:
 
 ``` bash
-git clone https://github.com/yourusername/EventQuest.git
+git clone https://github.com/red4cted25/EventQuest.git
 cd EventQuest
 ```
 
