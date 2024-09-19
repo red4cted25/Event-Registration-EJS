@@ -55,7 +55,7 @@ main {
     flex: 1;
 }
 
-input, textarea{
+input, textarea, button {
     font-family: 'Quicksand', sans-serif;
 }
 
@@ -78,6 +78,13 @@ button:hover, .btn:hover {
     background-color: #0056b3; 
 }
 
+.del-btn {
+    background-color:  #dc3545;
+}
+
+.del-btn:hover {
+    background-color: #c82333;
+}
 
 /* Footer Styling */
 footer {
