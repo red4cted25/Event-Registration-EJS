@@ -41,7 +41,14 @@ input[type="text"], textarea {
     margin-top: 2vh;
 }
 
-/* ! Fix button styling -> styling from class .btn won't apply here? */
-.back {
-    margin: 3vh auto;
+.btn {
+    font-size: 1vw;
+    padding: 1vh .5vw;
+    border-radius: 0.3vw;
+    flex-basis: 15vw;
+    text-align: center;
+}
+
+.btns {
+    margin-bottom: 3vh;
 }

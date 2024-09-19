@@ -65,11 +65,19 @@ main {
     flex: 1;
 }
 
-input, textarea, button {
+input, textarea {
     font-family: 'Quicksand', sans-serif;
 }
 
 /* Buttons */
+.btns {
+    display: flex;
+    justify-content: center;
+    gap: 5vw;
+    margin-top: 3vh;
+    width: 100%;
+}
+
 button, .btn {
     background-color: #007bff; 
     color: #fff; 
@@ -78,6 +86,7 @@ button, .btn {
     padding: 1vh 2vw;
     cursor: pointer;
     transition: background-color 0.3s;
+    font-family: 'Quicksand', sans-serif;
 }
 
 .btn {
