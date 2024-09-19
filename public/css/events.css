@@ -2,19 +2,22 @@ h1 {
     text-align: center;
 }
 
+
 /* Table Styling */
 table {
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
     margin: 3vh auto;
     font-size: 0.9em;
-    font-family: sans-serif;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    border-radius: 1vw 1vw 0 0;
+    overflow: hidden;
+    border-bottom: .5vh solid #333;
 }
 
 thead {
     background-color: #333;
     color: #fff;
-    border-radius: 1vw;
 }
 
 td, th {
@@ -33,13 +36,4 @@ tbody tr {
 
 tr:nth-child(even) {
     background-color: #ddd;
-}
-
-tr:last-of-type {
-    border-bottom: 2px solid #333;
-}
-
-tr.active-row {
-    font-weight: bold;
-    color: #009879;
 }
