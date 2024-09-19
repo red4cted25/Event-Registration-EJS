@@ -69,6 +69,12 @@ input, textarea {
     font-family: 'Quicksand', sans-serif;
 }
 
+textarea {
+    min-width: 20%;
+    max-width: 100%;
+    min-height: 10vh;
+}
+
 /* Buttons */
 .btns {
     display: flex;
