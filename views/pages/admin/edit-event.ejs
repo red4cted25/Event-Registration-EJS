@@ -20,7 +20,8 @@
                         <td><%= person.email %></td>
                         <td><%= person.date %></td>
                         <td>
-                            <form action="/admin/edit/<%= event.id %>/<%= person.id %>" method="POST" style="display: inline;">
+                            <form action="/admin/edit/delete/<%= person.personId %>" method="POST" style="display: inline;">
+                                <input type="hidden" name="eventId" value="<%= person.eventId %>">
                                 <button type="submit" class="btn btn-small btn-danger">Delete</button>
                             </form>
                         </td>
@@ -45,8 +46,7 @@
 
         <label for="description">Description:</label>
         <textarea cols="40" rows="10" id="description" name="description" required><%= event.description %></textarea>
-        <div class="flex"><button type="submit">Update event</button></div>
+        <div class="flex"><button type="submit">Update Event</button></div>
     </form>
-
-    <button type="button" class="back"><a href="/">Back to list</a></button>
+    <button type="button" class="back btn"><a href="/admin">Back to list</a></button>
 </div>
