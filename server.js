@@ -147,6 +147,19 @@ app.post('/admin/add', (req, res) => {
     res.redirect('/admin');  
 });
 
+// ! Download files for admin when pushing through render.com
+// Route to download events.json
+app.get('/download/events', (req, res) => {
+    const file = path.join(__dirname, './data/events.json');
+    res.download(file);
+});
+
+// Route to download registrations.json
+app.get('/download/registrations', (req, res) => {
+    const file = path.join(__dirname, './data/registrations.json');
+    res.download(file);
+});
+
 app.listen(PORT, () => {
     console.log(`Server running on port http://localhost:${PORT}`)
 })

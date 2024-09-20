@@ -10,3 +10,15 @@
 #details .btn {
     margin: 2vh auto;
 }
+
+.btns .btn {
+    font-size: 1vw;
+    padding: 1vh .5vw;
+    border-radius: 0.3vw;
+    flex-basis: 15vw;
+    text-align: center;
+}
+
+.btns {
+    margin-bottom: 3vh;
+}
