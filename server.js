@@ -167,13 +167,23 @@ function formatDate(dateInput) {
 // Function to get events from events.json
 function getEvents() {
     const data = fs.readFileSync(path.join(__dirname, './data/events.json'), 'utf8');
-    return JSON.parse(data)
+    let events = JSON.parse(data)
+
+    // Sort events by date in descending order (closest date first)
+    events = events.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+    return events
 }
 
 // Function to get registered people from registrations.json
 function getRegistrations() {
     const data = fs.readFileSync('./data/registrations.json', 'utf8');
-    return JSON.parse(data)
+    let registrations = JSON.parse(data)
+    
+    // Sort registrations by date in descending order (closest date first)
+    registrations = registrations.sort((a, b) => new Date(a.date) - new Date(b.date));
+    
+    return registrations
 }
 
 // Function to write registrations
