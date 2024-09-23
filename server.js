@@ -72,11 +72,17 @@ app.get('/register/:id', async (req, res) => {
 // POST route to handle registration
 app.post('/register', async (req, res) => {
     try {
+        const date = new Date(req.body.date).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+        });
+
         const newRegistration = new Registration({
             personId: newId(await Registration.find(), 'personId'), // Generate a new unique personID
             name: req.body.personName,
             email: req.body.email,
-            date: newDate(),
+            date: date,
             eventId: req.body.eventId
         });
 
@@ -195,10 +201,16 @@ app.get('/admin/add', async (req, res) => {
 // Admin Add - POST
 app.post('/admin/add', async (req, res) => {
     try {
+        const date = new Date(req.body.date).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+        });
+
         const newEvent = new Event({
             name: req.body.name,
-            date: req.body.date,
-            capacity: parseInt(req.body.capacity),
+            date: date,
+            capacity: req.body.capacity,
             location: req.body.location,
             description: req.body.description,
             attendees: 0
