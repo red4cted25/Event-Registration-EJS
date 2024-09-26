@@ -137,7 +137,7 @@ Event-Registration-EJS/
    - After registering, you will see a success message confirming your spot in the event.
    - Your registration details will be stored in registrations.json in the project’s data directory.
 
-###Admin Panel Example
+### Admin Panel Example
 1. Log in to the Admin Dashboard
    - Navigate to `http://localhost:5000/admin` to access the Admin dashboard.
 2. Manage Events
